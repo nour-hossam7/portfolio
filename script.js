@@ -1,21 +1,3 @@
-// Scroll reveal effect for sections
-document.addEventListener('DOMContentLoaded', function() {
-  const sections = document.querySelectorAll('.section');
-  const revealSection = (section) => {
-    section.classList.add('reveal');
-  };
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        revealSection(entry.target);
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-});
 /**
  * Nour Hossam — Portfolio
  * Navigation, theme toggle, scroll animations, skill bars
@@ -28,9 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.querySelector('.nav-links');
   const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = themeToggle.querySelector('i');
+  const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
   const contactForm = document.getElementById('contactForm');
   const skillFills = document.querySelectorAll('.skill-fill');
+  const projectFilterButtons = document.querySelectorAll('.project-filter-btn');
+  const projectCards = document.querySelectorAll('.project-card[data-category]');
 
   // ——— Theme (dark/light) ———
   const STORAGE_KEY = 'portfolio-theme';
@@ -43,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
-    themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    if (themeIcon) {
+      themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    }
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
@@ -52,34 +38,42 @@ document.addEventListener('DOMContentLoaded', function() {
     setTheme(theme);
   }
 
-  themeToggle.addEventListener('click', () => {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    setTheme(isLight ? 'dark' : 'light');
-  });
+  if (themeToggle && themeIcon) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      setTheme(isLight ? 'dark' : 'light');
+    });
+  }
 
   initTheme();
 
   // ——— Mobile nav ———
   function openMenu() {
+    if (!navLinks || !navToggle) return;
     navLinks.classList.add('active');
     navToggle.classList.add('active');
     navToggle.setAttribute('aria-expanded', 'true');
   }
 
   function closeMenu() {
+    if (!navLinks || !navToggle) return;
     navLinks.classList.remove('active');
     navToggle.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
   }
 
-  navToggle.addEventListener('click', () => {
-    if (navLinks.classList.contains('active')) closeMenu();
-    else openMenu();
-  });
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      if (navLinks.classList.contains('active')) closeMenu();
+      else openMenu();
+    });
+  }
 
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => closeMenu());
-  });
+  if (navLinks) {
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => closeMenu());
+    });
+  }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
@@ -87,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ——— Nav background on scroll ———
   function updateNav() {
+    if (!nav) return;
     if (window.scrollY > 50) {
       nav.classList.add('scrolled');
     } else {
@@ -142,11 +137,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
   skillFills.forEach((fill) => skillBarObserver.observe(fill));
 
+  // ——— Project filters ———
+  projectFilterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedCategory = button.getAttribute('data-filter');
+
+      projectFilterButtons.forEach((filterButton) => {
+        const isActive = filterButton === button;
+        filterButton.classList.toggle('active', isActive);
+        filterButton.setAttribute('aria-pressed', String(isActive));
+      });
+
+      projectCards.forEach((card) => {
+        const categories = (card.getAttribute('data-category') || '').split(' ');
+        card.hidden = selectedCategory !== 'all' && !categories.includes(selectedCategory);
+      });
+    });
+  });
+
   // ——— Contact form ———
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const btn = contactForm.querySelector('button[type="submit"]');
+      if (!btn) return;
       const originalText = btn.textContent;
       btn.textContent = 'Sending…';
       btn.disabled = true;

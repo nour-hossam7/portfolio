@@ -1,8 +1,3 @@
-/**
- * Nour Hossam — Portfolio
- * Navigation, theme toggle, scroll animations, skill bars
- */
-
 (function () {
   'use strict';
 
@@ -16,7 +11,6 @@
   const projectFilterButtons = document.querySelectorAll('.project-filter-btn');
   const projectCards = document.querySelectorAll('.project-card[data-category]');
 
-  // ——— Theme (dark/light) ———
   const STORAGE_KEY = 'portfolio-theme';
 
   function getPreferredTheme() {
@@ -47,7 +41,6 @@
 
   initTheme();
 
-  // ——— Mobile nav ———
   function openMenu() {
     if (!navLinks || !navToggle) return;
     navLinks.classList.add('active');
@@ -79,7 +72,6 @@
     if (e.key === 'Escape') closeMenu();
   });
 
-  // ——— Nav background on scroll ———
   function updateNav() {
     if (!nav) return;
     if (window.scrollY > 50) {
@@ -92,7 +84,6 @@
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
-  // ——— Smooth scroll for anchor links ———
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function (e) {
       const id = this.getAttribute('href');
@@ -105,7 +96,6 @@
     });
   });
 
-  // ——— Section reveal + skill bars ———
   const observerOptions = {
     root: null,
     rootMargin: '0px 0px -80px 0px',
@@ -137,7 +127,6 @@
 
   skillFills.forEach((fill) => skillBarObserver.observe(fill));
 
-  // ——— Project filters ———
   projectFilterButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const selectedCategory = button.getAttribute('data-filter');
@@ -155,7 +144,6 @@
     });
   });
 
-  // ——— Contact form ———
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -165,7 +153,6 @@
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
-      // Placeholder: in production you would send to an API or mailto
       setTimeout(() => {
         btn.textContent = 'Message sent!';
         btn.style.background = 'var(--accent-cyan)';
@@ -179,7 +166,6 @@
     });
   }
 
-  // ——— Footer year ———
   const footerYear = document.querySelector('.footer-year');
   if (footerYear) {
     footerYear.textContent = new Date().getFullYear();

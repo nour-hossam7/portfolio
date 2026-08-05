@@ -2768,3 +2768,504 @@ button:focus-visible {
     filter: none !important;
   }
 }
+
+/* ==================================================
+   Explicit cosmic animation scene
+   ================================================== */
+html,
+body {
+  overflow-x: hidden;
+}
+
+body::before,
+body::after,
+.hero-bg::before,
+.hero-bg::after,
+.hero-gradient::before,
+.hero-gradient::after {
+  display: none;
+}
+
+.cosmic-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  contain: strict;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero,
+.section,
+.sections-stack,
+.footer {
+  position: relative;
+  z-index: 2;
+}
+
+.star-layer,
+.nebula-layer,
+.shooting-stars {
+  position: absolute;
+  inset: -8%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Far stars: small, dense, and deliberately slow. */
+.star-layer--far {
+  z-index: 1;
+  background-image:
+    radial-gradient(circle, rgba(244, 247, 255, 0.7) 0 0.55px, transparent 0.85px),
+    radial-gradient(circle, rgba(101, 231, 255, 0.4) 0 0.45px, transparent 0.8px),
+    radial-gradient(circle, rgba(169, 112, 255, 0.34) 0 0.5px, transparent 0.82px);
+  background-position: 7px 13px, 53px 79px, 101px 31px;
+  background-size: 73px 83px, 127px 139px, 181px 193px;
+  opacity: 0.32;
+  will-change: background-position, transform, opacity;
+  animation:
+    cosmicDriftFar 136s linear infinite,
+    cosmicTwinkleFar 8.7s ease-in-out -2.4s infinite alternate;
+}
+
+.star-layer--far::after {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 7%;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: rgba(244, 247, 255, 0.58);
+  box-shadow:
+    11vw 7vh rgba(101, 231, 255, 0.45), 24vw 18vh rgba(244, 247, 255, 0.5),
+    39vw 5vh rgba(169, 112, 255, 0.42), 54vw 23vh rgba(244, 247, 255, 0.58),
+    68vw 11vh rgba(101, 231, 255, 0.4), 83vw 29vh rgba(244, 247, 255, 0.48),
+    7vw 43vh rgba(169, 112, 255, 0.38), 31vw 51vh rgba(244, 247, 255, 0.52),
+    47vw 39vh rgba(101, 231, 255, 0.44), 76vw 57vh rgba(244, 247, 255, 0.5),
+    18vw 72vh rgba(244, 247, 255, 0.46), 61vw 78vh rgba(169, 112, 255, 0.4),
+    91vw 69vh rgba(101, 231, 255, 0.42), 42vw 91vh rgba(244, 247, 255, 0.5);
+}
+
+/* Mid-depth stars: larger, less dense, and moving in another direction. */
+.star-layer--mid {
+  z-index: 2;
+  background-image:
+    radial-gradient(circle, rgba(248, 251, 255, 0.9) 0 0.9px, transparent 1.35px),
+    radial-gradient(circle, rgba(101, 231, 255, 0.75) 0 1.1px, transparent 1.55px),
+    radial-gradient(circle, rgba(208, 138, 255, 0.58) 0 0.8px, transparent 1.3px);
+  background-position: 19px 29px, 97px 61px, 43px 127px;
+  background-size: 149px 163px, 229px 211px, 307px 281px;
+  opacity: 0.46;
+  will-change: background-position, transform, opacity;
+  animation:
+    cosmicDriftMid 87s linear infinite,
+    cosmicTwinkleMid 6.4s cubic-bezier(0.45, 0, 0.55, 1) -4.1s infinite alternate;
+}
+
+.star-layer--mid::after {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 4%;
+  width: 1.6px;
+  height: 1.6px;
+  border-radius: 50%;
+  background: rgba(244, 247, 255, 0.78);
+  box-shadow:
+    18vw 9vh rgba(101, 231, 255, 0.7), 44vw 16vh rgba(244, 247, 255, 0.8),
+    72vw 6vh rgba(169, 112, 255, 0.68), 87vw 34vh rgba(244, 247, 255, 0.72),
+    9vw 48vh rgba(101, 231, 255, 0.66), 36vw 61vh rgba(244, 247, 255, 0.78),
+    64vw 48vh rgba(169, 112, 255, 0.62), 79vw 73vh rgba(101, 231, 255, 0.68),
+    23vw 83vh rgba(244, 247, 255, 0.72), 53vw 94vh rgba(169, 112, 255, 0.64);
+}
+
+/* Near stars: bright, sparse points with a restrained halo. */
+.star-layer--near {
+  z-index: 3;
+  background-image:
+    radial-gradient(circle, #ffffff 0 1.15px, rgba(101, 231, 255, 0.7) 1.4px, transparent 2.6px),
+    radial-gradient(circle, #faf7ff 0 1px, rgba(169, 112, 255, 0.62) 1.35px, transparent 2.45px);
+  background-position: 37px 47px, 173px 113px;
+  background-size: 337px 311px, 463px 421px;
+  opacity: 0.58;
+  will-change: background-position, transform, opacity;
+  animation:
+    cosmicDriftNear 59s linear infinite,
+    cosmicTwinkleNear 4.6s cubic-bezier(0.37, 0, 0.63, 1) -1.3s infinite alternate;
+}
+
+.star-layer--near::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  width: 2.3px;
+  height: 2.3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    21vw 3vh 4px 0 rgba(101, 231, 255, 0.85),
+    51vw 19vh 4px 0 rgba(244, 247, 255, 0.78),
+    78vw 9vh 5px 0 rgba(169, 112, 255, 0.76),
+    12vw 47vh 4px 0 rgba(244, 247, 255, 0.76),
+    67vw 55vh 5px 0 rgba(101, 231, 255, 0.78),
+    88vw 72vh 4px 0 rgba(244, 247, 255, 0.7),
+    39vw 83vh 5px 0 rgba(169, 112, 255, 0.74);
+}
+
+@keyframes cosmicDriftFar {
+  from { background-position: 7px 13px, 53px 79px, 101px 31px; }
+  to { background-position: 80px 96px, 180px 218px, 282px 224px; }
+}
+
+@keyframes cosmicDriftMid {
+  from { background-position: 19px 29px, 97px 61px, 43px 127px; }
+  to { background-position: -130px 192px, -132px 272px, -264px 408px; }
+}
+
+@keyframes cosmicDriftNear {
+  from { background-position: 37px 47px, 173px 113px; }
+  to { background-position: 374px -264px, 636px -308px; }
+}
+
+@keyframes cosmicTwinkleFar {
+  0% { opacity: 0.24; filter: brightness(0.88); transform: scale(1); }
+  42% { opacity: 0.34; filter: brightness(1.08); transform: scale(1.002); }
+  73% { opacity: 0.28; filter: brightness(0.96); transform: scale(1); }
+  100% { opacity: 0.37; filter: brightness(1.12); transform: scale(1.003); }
+}
+
+@keyframes cosmicTwinkleMid {
+  0% { opacity: 0.34; filter: brightness(0.9) drop-shadow(0 0 1px rgba(101, 231, 255, 0.18)); transform: scale(1); }
+  31% { opacity: 0.52; filter: brightness(1.13) drop-shadow(0 0 2px rgba(101, 231, 255, 0.28)); transform: scale(1.003); }
+  68% { opacity: 0.39; filter: brightness(0.98) drop-shadow(0 0 1px rgba(169, 112, 255, 0.2)); transform: scale(1); }
+  100% { opacity: 0.58; filter: brightness(1.18) drop-shadow(0 0 2px rgba(169, 112, 255, 0.3)); transform: scale(1.004); }
+}
+
+@keyframes cosmicTwinkleNear {
+  0% { opacity: 0.4; filter: brightness(0.92) drop-shadow(0 0 2px rgba(101, 231, 255, 0.28)); transform: scale(1); }
+  36% { opacity: 0.7; filter: brightness(1.22) drop-shadow(0 0 4px rgba(101, 231, 255, 0.42)); transform: scale(1.005); }
+  63% { opacity: 0.5; filter: brightness(1.02) drop-shadow(0 0 2px rgba(169, 112, 255, 0.3)); transform: scale(1.002); }
+  100% { opacity: 0.76; filter: brightness(1.28) drop-shadow(0 0 5px rgba(169, 112, 255, 0.44)); transform: scale(1.006); }
+}
+
+/* Two independent gas clouds remain below the star layers. */
+.nebula-layer {
+  z-index: 0;
+  inset: -18%;
+  border-radius: 45%;
+  opacity: 0.56;
+  will-change: transform, opacity;
+}
+
+.nebula-layer--one {
+  background:
+    radial-gradient(ellipse 42% 34% at 25% 30%, rgba(101, 231, 255, 0.13), transparent 70%),
+    radial-gradient(ellipse 35% 28% at 74% 62%, rgba(86, 140, 255, 0.08), transparent 72%);
+  filter: blur(52px);
+  animation: nebulaFloatOne 31s ease-in-out -6s infinite alternate;
+}
+
+.nebula-layer--two {
+  background:
+    radial-gradient(ellipse 39% 32% at 75% 25%, rgba(169, 112, 255, 0.12), transparent 70%),
+    radial-gradient(ellipse 31% 26% at 36% 76%, rgba(240, 109, 255, 0.055), transparent 72%);
+  filter: blur(62px);
+  animation: nebulaFloatTwo 38s ease-in-out -14s infinite alternate;
+}
+
+@keyframes nebulaFloatOne {
+  0% { opacity: 0.42; transform: translate3d(-2%, -1%, 0) scale(0.96) rotate(-1deg); }
+  52% { opacity: 0.62; transform: translate3d(3%, 1%, 0) scale(1.06) rotate(1.2deg); }
+  100% { opacity: 0.5; transform: translate3d(0, 3%, 0) scale(1.02) rotate(-0.4deg); }
+}
+
+@keyframes nebulaFloatTwo {
+  0% { opacity: 0.36; transform: translate3d(2%, -2%, 0) scale(1.04) rotate(1deg); }
+  48% { opacity: 0.58; transform: translate3d(-3%, 2%, 0) scale(0.95) rotate(-1.4deg); }
+  100% { opacity: 0.44; transform: translate3d(1%, 3%, 0) scale(1.07) rotate(0.6deg); }
+}
+
+/* Three infrequent shooting stars with separate paths and cycles. */
+.shooting-stars {
+  z-index: 4;
+  inset: 0;
+  overflow: hidden;
+}
+
+.shooting-star {
+  position: absolute;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, rgba(244, 247, 255, 0.28) 38%, rgba(244, 247, 255, 0.95) 88%, #65e7ff 100%);
+  box-shadow: 0 0 8px rgba(101, 231, 255, 0.48);
+  opacity: 0;
+  transform-origin: right center;
+  will-change: transform, opacity;
+}
+
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 7px 2px rgba(101, 231, 255, 0.58);
+  transform: translateY(-50%);
+}
+
+.shooting-star--one {
+  top: 8%;
+  left: -12%;
+  width: 170px;
+  animation: shootingStarOne 14s ease-out 2.5s infinite;
+}
+
+.shooting-star--two {
+  top: 24%;
+  left: 15%;
+  width: 125px;
+  background: linear-gradient(90deg, transparent, rgba(250, 247, 255, 0.32) 42%, #f8f4ff 88%, #c8a9ff);
+  box-shadow: 0 0 8px rgba(169, 112, 255, 0.46);
+  animation: shootingStarTwo 18s ease-out 8.8s infinite;
+}
+
+.shooting-star--two::after {
+  box-shadow: 0 0 7px 2px rgba(169, 112, 255, 0.58);
+}
+
+.shooting-star--three {
+  top: 4%;
+  left: 48%;
+  width: 105px;
+  animation: shootingStarThree 22s ease-out 15.2s infinite;
+}
+
+@keyframes shootingStarOne {
+  0%, 68% { opacity: 0; transform: translate3d(0, 0, 0) rotate(31deg) scaleX(0.35); }
+  70% { opacity: 0.95; }
+  77% { opacity: 0; transform: translate3d(62vw, 43vh, 0) rotate(31deg) scaleX(1); }
+  100% { opacity: 0; transform: translate3d(62vw, 43vh, 0) rotate(31deg) scaleX(1); }
+}
+
+@keyframes shootingStarTwo {
+  0%, 76% { opacity: 0; transform: translate3d(0, 0, 0) rotate(27deg) scaleX(0.4); }
+  78% { opacity: 0.8; }
+  84% { opacity: 0; transform: translate3d(48vw, 31vh, 0) rotate(27deg) scaleX(1); }
+  100% { opacity: 0; transform: translate3d(48vw, 31vh, 0) rotate(27deg) scaleX(1); }
+}
+
+@keyframes shootingStarThree {
+  0%, 82% { opacity: 0; transform: translate3d(0, 0, 0) rotate(34deg) scaleX(0.3); }
+  84% { opacity: 0.82; }
+  89% { opacity: 0; transform: translate3d(42vw, 37vh, 0) rotate(34deg) scaleX(1); }
+  100% { opacity: 0; transform: translate3d(42vw, 37vh, 0) rotate(34deg) scaleX(1); }
+}
+
+/* Hero aura and name motion */
+.hero-content {
+  isolation: isolate;
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -30% -20%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(101, 231, 255, 0.105), rgba(169, 112, 255, 0.055) 40%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+  animation: heroAuraPulse 12s ease-in-out infinite alternate;
+}
+
+.hero-name {
+  background-size: 300% auto;
+  animation: fadeUp 0.8s ease 0.1s forwards, cosmicNameGradient 9s ease-in-out 0.9s infinite alternate;
+}
+
+@keyframes heroAuraPulse {
+  from { opacity: 0.48; transform: scale(0.94); }
+  to { opacity: 0.88; transform: scale(1.07); }
+}
+
+/* Interactive card light only runs during hover/focus. */
+.about-card,
+.about-quick-profile,
+.skill-category,
+.project-card,
+.timeline-content,
+.education-card,
+.cert-card,
+.contact-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-position 0.5s ease;
+}
+
+.about-card:hover,
+.about-card:focus-within,
+.about-quick-profile:hover,
+.about-quick-profile:focus-within,
+.skill-category:hover,
+.skill-category:focus-within,
+.project-card:hover,
+.project-card:focus-within,
+.timeline-content:hover,
+.timeline-content:focus-within,
+.education-card:hover,
+.education-card:focus-within,
+.cert-card:hover,
+.cert-card:focus-within,
+.contact-card:hover,
+.contact-card:focus-visible {
+  transform: translateY(-6px) scale(1.008);
+  border-color: rgba(101, 231, 255, 0.34);
+  box-shadow:
+    0 22px 48px rgba(1, 3, 15, 0.28),
+    0 0 27px rgba(101, 231, 255, 0.1),
+    0 0 18px rgba(169, 112, 255, 0.08),
+    inset 0 1px 0 rgba(244, 247, 255, 0.08);
+}
+
+.project-card::after {
+  display: none;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: -35% auto -35% -55%;
+  width: 32%;
+  background: linear-gradient(110deg, transparent, rgba(244, 247, 255, 0.11), rgba(101, 231, 255, 0.16), transparent);
+  opacity: 0;
+  transform: translateX(0) skewX(-15deg);
+  pointer-events: none;
+}
+
+.project-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card:hover::before,
+.project-card:focus-within::before {
+  animation: cosmicCardSweep 1.15s ease-out both;
+}
+
+@keyframes cosmicCardSweep {
+  0% { opacity: 0; transform: translateX(0) skewX(-15deg); }
+  25% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateX(520%) skewX(-15deg); }
+}
+
+.skill-fill {
+  background-size: 220% 100%;
+  animation: skillGradientFlow 7s linear infinite;
+}
+
+@keyframes skillGradientFlow {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+/* If scripting is unavailable, reveal-hidden content remains readable. */
+@media (scripting: none) {
+  .section .section-title,
+  .section .about-text,
+  .section .about-visual,
+  .section .skill-category,
+  .section .project-card,
+  .section .timeline-item,
+  .section .education-card,
+  .section .cert-card,
+  .section .contact-intro-wrap,
+  .section .contact-grid,
+  .section .contact-form {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+[data-theme="light"] .cosmic-scene {
+  opacity: 0.46;
+}
+
+[data-theme="light"] .nebula-layer {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .shooting-star {
+  filter: opacity(0.55);
+}
+
+@keyframes cosmicTwinkleNearMobile {
+  0% { opacity: 0.2; filter: brightness(0.9); transform: scale(1); }
+  100% { opacity: 0.4; filter: brightness(1.12); transform: scale(1.003); }
+}
+
+@keyframes cosmicTwinkleNearTiny {
+  0% { opacity: 0.1; filter: brightness(0.9); transform: scale(1); }
+  100% { opacity: 0.22; filter: brightness(1.08); transform: scale(1.002); }
+}
+
+@media (max-width: 768px) {
+  .cosmic-scene { inset: 0; }
+  .star-layer,
+  .nebula-layer { inset: -5%; }
+  .star-layer--near {
+    animation-name: cosmicDriftNear, cosmicTwinkleNearMobile;
+  }
+  .nebula-layer--one { filter: blur(38px); }
+  .nebula-layer--two { filter: blur(44px); }
+  .shooting-star--three { display: none; }
+  .about-card:hover,
+  .skill-category:hover,
+  .project-card:hover,
+  .timeline-content:hover,
+  .education-card:hover,
+  .cert-card:hover,
+  .contact-card:hover {
+    box-shadow: 0 16px 34px rgba(1, 3, 15, 0.2), 0 0 18px rgba(101, 231, 255, 0.07);
+  }
+}
+
+@media (max-width: 480px) {
+  .star-layer--near {
+    opacity: 0.14;
+    animation-name: cosmicDriftNear, cosmicTwinkleNearTiny;
+  }
+  .shooting-star--two,
+  .shooting-star--three { display: none; }
+  .nebula-layer { opacity: 0.32; filter: blur(32px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-layer,
+  .nebula-layer,
+  .hero-content::before,
+  .hero-name,
+  .skill-fill {
+    animation: none !important;
+  }
+
+  .shooting-stars,
+  .project-card::before {
+    display: none !important;
+  }
+
+  .star-layer--far { opacity: 0.28; transform: none; filter: none; }
+  .star-layer--mid { opacity: 0.36; transform: none; filter: none; }
+  .star-layer--near { opacity: 0.42; transform: none; filter: none; }
+  .nebula-layer { opacity: 0.36; transform: none; }
+  .hero-name { opacity: 1; transform: none; filter: none; }
+}

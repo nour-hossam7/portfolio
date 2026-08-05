@@ -5,20 +5,21 @@
 
    :root {
     /* Dark theme (default) */
-    --bg-primary: #0a0e17;
-    --bg-secondary: #111827;
-    --bg-card: #151d2e;
-    --bg-card-hover: #1a2332;
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-cyan: #22d3ee;
-    --accent-purple: #a78bfa;
-    --accent-blue: #3b82f6;
-    --gradient-1: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
-    --gradient-2: linear-gradient(135deg, #3b82f6 0%, #a78bfa 50%);
-    --border-subtle: rgba(148, 163, 184, 0.1);
-    --shadow-glow: 0 0 40px rgba(34, 211, 238, 0.15);
+    --bg-primary: #050816;
+    --bg-secondary: #090d22;
+    --bg-card: rgba(14, 20, 45, 0.78);
+    --bg-card-hover: rgba(20, 28, 60, 0.92);
+    --text-primary: #f4f7ff;
+    --text-secondary: #b8c0df;
+    --text-muted: #7f89ad;
+    --accent-cyan: #65e7ff;
+    --accent-purple: #a970ff;
+    --accent-blue: #568cff;
+    --accent-pink: #f06dff;
+    --gradient-1: linear-gradient(135deg, #65e7ff 0%, #7c8cff 45%, #b66cff 100%);
+    --gradient-2: linear-gradient(135deg, #568cff 0%, #9b6cff 55%, #f06dff 100%);
+    --border-subtle: rgba(164, 177, 255, 0.14);
+    --shadow-glow: 0 0 40px rgba(101, 231, 255, 0.12);
     --font-sans: 'DM Sans', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --transition: 0.25s ease;
@@ -26,15 +27,19 @@
   }
   
   [data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f1f5f9;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --border-subtle: rgba(15, 23, 42, 0.08);
-    --shadow-glow: 0 0 40px rgba(34, 211, 238, 0.12);
+    --bg-primary: #f5f7ff;
+    --bg-secondary: #eceffd;
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-hover: #f4f1ff;
+    --text-primary: #151936;
+    --text-secondary: #50597a;
+    --text-muted: #747d9d;
+    --accent-cyan: #087c9b;
+    --accent-purple: #754dcc;
+    --accent-blue: #3869d4;
+    --accent-pink: #b441b9;
+    --border-subtle: rgba(82, 94, 160, 0.13);
+    --shadow-glow: 0 0 40px rgba(86, 140, 255, 0.12);
   }
   
   *,
@@ -64,6 +69,8 @@ body > * {
   width: 100%;
   max-width: 100%;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
   
   a {
@@ -421,10 +428,12 @@ body > * {
     from {
       opacity: 0;
       transform: translateY(28px) scale(0.98);
+      filter: blur(5px);
     }
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
+      filter: blur(0);
     }
   }
   
@@ -2075,4 +2084,687 @@ body > * {
   width: 46px;
   height: 46px;
   font-size: 1.3rem;
+}
+
+/* ========== Cosmic visual theme ========== */
+body {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(ellipse 70% 45% at 8% 12%, rgba(101, 231, 255, 0.08), transparent 68%),
+    radial-gradient(ellipse 65% 42% at 92% 30%, rgba(169, 112, 255, 0.1), transparent 70%),
+    radial-gradient(ellipse 55% 36% at 45% 72%, rgba(86, 140, 255, 0.07), transparent 72%),
+    linear-gradient(180deg, #050816 0%, #070a1b 52%, #050816 100%);
+  background-attachment: fixed;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+body::before {
+  background-image:
+    radial-gradient(circle, rgba(244, 247, 255, 0.55) 0 0.45px, transparent 0.75px),
+    radial-gradient(circle, rgba(101, 231, 255, 0.34) 0 0.55px, transparent 0.85px),
+    radial-gradient(circle, rgba(182, 108, 255, 0.28) 0 0.4px, transparent 0.72px);
+  background-position: 7px 11px, 43px 71px, 97px 29px;
+  background-size: 79px 89px, 127px 139px, 173px 191px;
+  opacity: 0.3;
+  animation:
+    cosmicFarStarDrift 128s linear infinite,
+    cosmicFarStarTwinkle 7.4s ease-in-out -3.1s infinite;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(101, 231, 255, 0.07), transparent 22%),
+    radial-gradient(circle at 78% 58%, rgba(169, 112, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 48% 92%, rgba(240, 109, 255, 0.045), transparent 20%);
+  filter: blur(24px);
+  transform-origin: 55% 42%;
+  animation: cosmicNebulaBreathe 32s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 70% 45% at 8% 12%, rgba(101, 231, 255, 0.15), transparent 68%),
+    radial-gradient(ellipse 65% 42% at 92% 30%, rgba(169, 112, 255, 0.14), transparent 70%),
+    radial-gradient(ellipse 55% 36% at 45% 72%, rgba(86, 140, 255, 0.1), transparent 72%),
+    linear-gradient(180deg, #f8f9ff 0%, #eef1ff 52%, #f5f7ff 100%);
+}
+
+[data-theme="light"] body::before {
+  background-image:
+    radial-gradient(circle, rgba(56, 105, 212, 0.42) 0 0.7px, transparent 0.9px),
+    radial-gradient(circle, rgba(8, 124, 155, 0.3) 0 0.8px, transparent 1px),
+    radial-gradient(circle, rgba(117, 77, 204, 0.25) 0 0.65px, transparent 0.9px);
+  opacity: 0.18;
+  animation-name: cosmicFarStarDrift, cosmicFarStarTwinkleLight;
+}
+
+[data-theme="light"] body::after { filter: blur(24px) opacity(0.5); }
+[data-theme="light"] .hero-bg::before { animation-name: cosmicMidStarDrift, cosmicMidStarTwinkleLight; }
+[data-theme="light"] .hero-bg::after { animation-name: cosmicNearStarDrift, cosmicNearStarTwinkleLight; }
+[data-theme="light"] .hero-gradient::before,
+[data-theme="light"] .hero-gradient::after { filter: opacity(0.38); }
+[data-theme="light"] .hero-glow { filter: blur(120px) opacity(0.52); }
+
+@keyframes cosmicFarStarDrift {
+  to { background-position: 86px 100px, 170px 210px, 270px 220px; }
+}
+
+@keyframes cosmicFarStarTwinkle {
+  0%, 100% { opacity: 0.23; }
+  38% { opacity: 0.33; }
+  68% { opacity: 0.27; }
+}
+
+@keyframes cosmicFarStarTwinkleLight {
+  0%, 100% { opacity: 0.1; }
+  42% { opacity: 0.19; }
+  74% { opacity: 0.14; }
+}
+
+@keyframes cosmicNebulaBreathe {
+  0% { opacity: 0.72; transform: translate3d(-1%, 0, 0) scale(1); }
+  48% { opacity: 0.92; transform: translate3d(1.2%, -0.8%, 0) scale(1.035) rotate(0.3deg); }
+  100% { opacity: 0.82; transform: translate3d(0, 1%, 0) scale(1.055) rotate(-0.25deg); }
+}
+
+.nav {
+  background: rgba(5, 8, 22, 0.68);
+  border-bottom-color: rgba(164, 177, 255, 0.07);
+  box-shadow: 0 10px 40px rgba(2, 4, 16, 0.08);
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+.nav.scrolled {
+  background: rgba(5, 8, 22, 0.9);
+  border-bottom-color: rgba(101, 231, 255, 0.14);
+  box-shadow: 0 10px 42px rgba(2, 4, 16, 0.38), 0 1px 22px rgba(101, 231, 255, 0.05);
+}
+
+[data-theme="light"] .nav,
+[data-theme="light"] .nav.scrolled {
+  background: rgba(245, 247, 255, 0.82);
+  border-bottom-color: rgba(82, 94, 160, 0.13);
+  box-shadow: 0 10px 38px rgba(55, 67, 125, 0.08);
+}
+
+.nav-logo {
+  background: var(--gradient-1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 9px rgba(101, 231, 255, 0.25));
+  background-size: 180% auto;
+  animation: cosmicLogoGlow 9s ease-in-out infinite alternate;
+}
+
+.theme-toggle,
+.nav-toggle {
+  border-radius: 10px;
+}
+
+.theme-toggle:focus-visible,
+.nav-toggle:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 4px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 9% 5% 4%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 28% 42%, rgba(101, 231, 255, 0.12), transparent 25%),
+    radial-gradient(circle at 72% 34%, rgba(169, 112, 255, 0.15), transparent 29%);
+  filter: blur(22px);
+  transform-origin: center;
+  animation: cosmicHeroNebula 26s ease-in-out infinite alternate;
+}
+
+/* ========== Layered hero star field ========== */
+.hero-bg::before,
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+/* Mid-depth stars */
+.hero-bg::before {
+  background-image:
+    radial-gradient(circle, rgba(244, 247, 255, 0.82) 0 0.85px, transparent 1.15px),
+    radial-gradient(circle, rgba(101, 231, 255, 0.72) 0 1px, transparent 1.35px),
+    radial-gradient(circle, rgba(169, 112, 255, 0.62) 0 0.75px, transparent 1.1px);
+  background-position: 17px 23px, 83px 57px, 41px 109px;
+  background-size: 137px 149px, 211px 227px, 283px 263px;
+  opacity: 0.42;
+  animation:
+    cosmicMidStarDrift 82s linear infinite,
+    cosmicMidStarTwinkle 5.7s ease-in-out -2.1s infinite;
+}
+
+/* Sparse bright foreground stars */
+.hero-bg::after {
+  background-image:
+    radial-gradient(circle, #f8fbff 0 1.1px, rgba(101, 231, 255, 0.62) 1.35px, transparent 2.4px),
+    radial-gradient(circle, #f7f3ff 0 1px, rgba(169, 112, 255, 0.52) 1.3px, transparent 2.2px);
+  background-position: 29px 43px, 151px 97px;
+  background-size: 317px 293px, 431px 397px;
+  opacity: 0.5;
+  animation:
+    cosmicNearStarDrift 56s linear infinite,
+    cosmicNearStarTwinkle 4.3s ease-in-out -1.4s infinite;
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 75% 55% at 50% -12%, rgba(86, 140, 255, 0.2), transparent 58%),
+    radial-gradient(ellipse 45% 38% at 82% 58%, rgba(169, 112, 255, 0.12), transparent 68%),
+    radial-gradient(ellipse 38% 32% at 15% 76%, rgba(101, 231, 255, 0.09), transparent 68%);
+  overflow: hidden;
+  animation: cosmicHeroGradient 30s ease-in-out infinite alternate;
+}
+
+/* ========== Occasional shooting stars ========== */
+.hero-gradient::before,
+.hero-gradient::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 190px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(244, 247, 255, 0.95) 72%, #65e7ff 100%);
+  box-shadow: 0 0 7px rgba(101, 231, 255, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-gradient::before {
+  top: 18%;
+  right: 8%;
+  animation: cosmicShootingStarOne 14s ease-out 2.8s infinite;
+}
+
+.hero-gradient::after {
+  top: 38%;
+  right: 25%;
+  width: 135px;
+  background: linear-gradient(90deg, transparent, rgba(244, 247, 255, 0.9) 76%, #c8a9ff 100%);
+  box-shadow: 0 0 6px rgba(169, 112, 255, 0.38);
+  animation: cosmicShootingStarTwo 19s ease-out 9.2s infinite;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(164, 177, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(164, 177, 255, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 55% at center, black, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at center, black, transparent 82%);
+  opacity: 0.6;
+  transform-origin: center;
+  animation: cosmicGridDrift 58s linear infinite;
+}
+
+.hero-glow { opacity: 0.15; filter: blur(120px); will-change: transform, opacity; }
+.hero-glow-1 { animation-duration: 18s; }
+.hero-glow-2 { animation-duration: 24s; }
+.hero-name {
+  background: linear-gradient(105deg, #f4f7ff 8%, #65e7ff 38%, #8d8cff 66%, #d08aff 92%);
+  background-size: 180% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 8px 28px rgba(101, 231, 255, 0.12));
+  animation: fadeUp 0.8s ease 0.1s forwards, cosmicNameGradient 9s ease-in-out 1s infinite alternate;
+}
+
+[data-theme="light"] .hero-name {
+  background-image: linear-gradient(105deg, #151936 8%, #087c9b 40%, #754dcc 88%);
+}
+
+.hero-greeting,
+.hero-title .accent,
+.accent {
+  text-shadow: 0 0 18px rgba(101, 231, 255, 0.22);
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before,
+.project-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.28) 48%, transparent 76%);
+  transform: translate3d(-130%, 0, 0) skewX(-16deg);
+  pointer-events: none;
+}
+
+.btn:hover::before,
+.btn:focus-visible::before,
+.project-link:hover::before,
+.project-link:focus-visible::before {
+  animation: cosmicControlSweep 0.85s ease-out both;
+}
+
+.btn-primary {
+  color: #070b1d;
+  background: var(--gradient-1);
+  box-shadow: 0 10px 30px rgba(101, 231, 255, 0.15), 0 0 0 1px rgba(244, 247, 255, 0.08) inset;
+}
+
+.btn-primary:hover { box-shadow: 0 14px 36px rgba(101, 231, 255, 0.22), 0 0 22px rgba(169, 112, 255, 0.12); }
+.btn-secondary,
+.btn-outline {
+  background: rgba(14, 20, 45, 0.62);
+  border-color: rgba(164, 177, 255, 0.22);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .btn-secondary,
+[data-theme="light"] .btn-outline { background: rgba(255, 255, 255, 0.7); }
+
+.section {
+  position: relative;
+  background-color: transparent;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(101, 231, 255, 0.07), rgba(169, 112, 255, 0.09), transparent) 1;
+}
+
+.section:nth-of-type(odd)::before {
+  content: '';
+  position: absolute;
+  width: min(42vw, 560px);
+  height: min(42vw, 560px);
+  top: 12%;
+  right: -15%;
+  border-radius: 50%;
+  background: rgba(169, 112, 255, 0.045);
+  filter: blur(95px);
+  pointer-events: none;
+  animation: cosmicSectionNebula 34s ease-in-out infinite alternate;
+}
+
+.sections-stack,
+.sections-stack .section,
+.section.experience,
+.section.education,
+.section.certifications { background: transparent; }
+
+.section-title-text {
+  background: linear-gradient(100deg, var(--text-primary) 12%, var(--accent-cyan) 58%, var(--accent-purple) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(101, 231, 255, 0.08));
+}
+
+.about-card,
+.skill-category,
+.project-card,
+.timeline-content,
+.education-card,
+.cert-card,
+.contact-card,
+.contact-intro-card {
+  background: linear-gradient(145deg, rgba(18, 25, 54, 0.82), rgba(10, 15, 36, 0.72));
+  border-color: rgba(164, 177, 255, 0.14);
+  box-shadow: 0 18px 48px rgba(1, 3, 15, 0.24), 0 1px 0 rgba(255, 255, 255, 0.045) inset;
+  backdrop-filter: blur(14px) saturate(120%);
+  background-size: 180% 180%;
+}
+
+[data-theme="light"] .about-card,
+[data-theme="light"] .skill-category,
+[data-theme="light"] .project-card,
+[data-theme="light"] .timeline-content,
+[data-theme="light"] .education-card,
+[data-theme="light"] .cert-card,
+[data-theme="light"] .contact-card,
+[data-theme="light"] .contact-intro-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(242, 243, 255, 0.82));
+  border-color: rgba(82, 94, 160, 0.14);
+  box-shadow: 0 18px 44px rgba(55, 67, 125, 0.1), 0 1px 0 #fff inset;
+}
+
+.about-card:hover,
+.about-card:focus-within,
+.skill-category:hover,
+.skill-category:focus-within,
+.project-card:hover,
+.project-card:focus-within,
+.timeline-content:hover,
+.timeline-content:focus-within,
+.education-card:hover,
+.education-card:focus-within,
+.cert-card:hover,
+.cert-card:focus-within,
+.contact-card:hover,
+.contact-card:focus-visible,
+.contact-intro-card:hover {
+  background: linear-gradient(145deg, rgba(21, 30, 63, 0.92), rgba(14, 20, 45, 0.86));
+  border-color: rgba(101, 231, 255, 0.3);
+  box-shadow: 0 22px 52px rgba(1, 3, 15, 0.3), 0 0 30px rgba(101, 231, 255, 0.09), 0 0 22px rgba(169, 112, 255, 0.07);
+  animation: cosmicCardSurfaceShift 2.8s ease both;
+}
+
+[data-theme="light"] .about-card:hover,
+[data-theme="light"] .about-card:focus-within,
+[data-theme="light"] .skill-category:hover,
+[data-theme="light"] .skill-category:focus-within,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .project-card:focus-within,
+[data-theme="light"] .timeline-content:hover,
+[data-theme="light"] .timeline-content:focus-within,
+[data-theme="light"] .education-card:hover,
+[data-theme="light"] .education-card:focus-within,
+[data-theme="light"] .cert-card:hover,
+[data-theme="light"] .cert-card:focus-within,
+[data-theme="light"] .contact-card:hover,
+[data-theme="light"] .contact-card:focus-visible,
+[data-theme="light"] .contact-intro-card:hover { background: #f8f7ff; }
+
+.about-card { box-shadow: 0 22px 60px rgba(1, 3, 15, 0.32), 0 0 38px rgba(101, 231, 255, 0.08); }
+.profile-image {
+  border-color: transparent;
+  outline: 1px solid rgba(101, 231, 255, 0.28);
+  box-shadow: 0 0 0 5px rgba(169, 112, 255, 0.06), 0 0 38px rgba(101, 231, 255, 0.16);
+}
+
+.about-highlight,
+.skill-tag,
+.project-tech span,
+.project-category,
+.project-badge {
+  background: linear-gradient(135deg, rgba(101, 231, 255, 0.09), rgba(169, 112, 255, 0.1));
+  border: 1px solid rgba(164, 177, 255, 0.13);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(101, 231, 255, 0.035);
+}
+
+[data-theme="light"] .about-highlight,
+[data-theme="light"] .skill-tag,
+[data-theme="light"] .project-tech span,
+[data-theme="light"] .project-category,
+[data-theme="light"] .project-badge { background: linear-gradient(135deg, rgba(101, 231, 255, 0.12), rgba(169, 112, 255, 0.1)); }
+
+.skill-category-icon,
+.project-icon,
+.education-icon,
+.cert-icon,
+.contact-icon,
+.about-profile-item i {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 9px rgba(101, 231, 255, 0.2));
+}
+
+.skill-bar { background: rgba(101, 231, 255, 0.07); border: 1px solid rgba(164, 177, 255, 0.08); }
+.skill-fill {
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-1);
+  background-size: 180% 100%;
+  box-shadow: 0 0 14px rgba(101, 231, 255, 0.23);
+  animation: cosmicSkillFinish 1.15s ease-out 0.8s both;
+}
+
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+  transform: translateX(-115%);
+  animation: cosmicSkillSweep 1.05s ease-out 0.82s 1 both;
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244, 247, 255, 0.7), transparent);
+  opacity: 0;
+  transform: translateX(-110%);
+  pointer-events: none;
+}
+
+.project-card:hover::after,
+.project-card:focus-within::after {
+  animation: cosmicProjectEdgeSweep 1.15s ease-out both;
+}
+
+.project-filter-btn {
+  background: rgba(14, 20, 45, 0.55);
+  border-color: rgba(164, 177, 255, 0.16);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .project-filter-btn { background: rgba(255, 255, 255, 0.72); }
+.project-filter-btn.active { color: #070b1d; box-shadow: 0 8px 24px rgba(101, 231, 255, 0.16); }
+.project-link { position: relative; overflow: hidden; border-color: rgba(164, 177, 255, 0.2); }
+.timeline::before { background: var(--gradient-1); box-shadow: 0 0 14px rgba(101, 231, 255, 0.18); }
+.timeline-marker {
+  background: #f4f7ff;
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 4px rgba(101, 231, 255, 0.08), 0 0 20px rgba(169, 112, 255, 0.38);
+}
+
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, rgba(5, 8, 22, 0.35), rgba(3, 5, 15, 0.86));
+  border-top: 0;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(101, 231, 255, 0.28), rgba(169, 112, 255, 0.24), transparent);
+}
+
+[data-theme="light"] .footer { background: linear-gradient(180deg, rgba(245, 247, 255, 0.4), rgba(236, 239, 253, 0.9)); }
+
+/* ========== Cosmic motion keyframes ========== */
+@keyframes cosmicMidStarDrift {
+  to { transform: translate3d(-54px, 76px, 0); background-position: 154px 172px, 294px 284px, 324px 372px; }
+}
+
+@keyframes cosmicNearStarDrift {
+  to { transform: translate3d(-72px, 94px, 0); background-position: 346px 336px, 582px 494px; }
+}
+
+@keyframes cosmicMidStarTwinkle {
+  0%, 100% { opacity: 0.31; }
+  27% { opacity: 0.48; }
+  61% { opacity: 0.36; }
+  82% { opacity: 0.53; }
+}
+
+@keyframes cosmicNearStarTwinkle {
+  0%, 100% { opacity: 0.32; }
+  34% { opacity: 0.58; }
+  57% { opacity: 0.4; }
+  79% { opacity: 0.66; }
+}
+
+@keyframes cosmicMidStarTwinkleLight {
+  0%, 100% { opacity: 0.12; }
+  36% { opacity: 0.22; }
+  72% { opacity: 0.16; }
+}
+
+@keyframes cosmicNearStarTwinkleLight {
+  0%, 100% { opacity: 0.14; }
+  43% { opacity: 0.26; }
+  77% { opacity: 0.18; }
+}
+
+@keyframes cosmicHeroNebula {
+  0% { opacity: 0.72; transform: translate3d(-1%, 0, 0) scale(0.98); }
+  52% { opacity: 1; transform: translate3d(1%, -1.2%, 0) scale(1.04); }
+  100% { opacity: 0.82; transform: translate3d(0.5%, 1%, 0) scale(1.015); }
+}
+
+@keyframes cosmicHeroGradient {
+  0% { opacity: 0.82; transform: scale(1.01) translate3d(-0.8%, 0, 0); }
+  50% { opacity: 1; transform: scale(1.055) translate3d(0.8%, -0.5%, 0); }
+  100% { opacity: 0.9; transform: scale(1.025) translate3d(0, 0.8%, 0); }
+}
+
+@keyframes cosmicGridDrift {
+  to { background-position: 144px 72px; transform: scale(1.045) rotate(0.35deg); }
+}
+
+@keyframes cosmicShootingStarOne {
+  0%, 72% { opacity: 0; transform: translate3d(12vw, -8vh, 0) rotate(-28deg) scaleX(0.35); }
+  73% { opacity: 0.9; }
+  78% { opacity: 0; transform: translate3d(-48vw, 35vh, 0) rotate(-28deg) scaleX(1); }
+  100% { opacity: 0; transform: translate3d(-48vw, 35vh, 0) rotate(-28deg) scaleX(1); }
+}
+
+@keyframes cosmicShootingStarTwo {
+  0%, 80% { opacity: 0; transform: translate3d(18vw, -10vh, 0) rotate(-23deg) scaleX(0.4); }
+  81% { opacity: 0.7; }
+  86% { opacity: 0; transform: translate3d(-42vw, 30vh, 0) rotate(-23deg) scaleX(1); }
+  100% { opacity: 0; transform: translate3d(-42vw, 30vh, 0) rotate(-23deg) scaleX(1); }
+}
+
+@keyframes cosmicNameGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 72% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes cosmicLogoGlow {
+  from { background-position: 0% 50%; opacity: 0.9; }
+  to { background-position: 100% 50%; opacity: 1; }
+}
+
+@keyframes cosmicControlSweep {
+  from { transform: translate3d(-130%, 0, 0) skewX(-16deg); }
+  to { transform: translate3d(130%, 0, 0) skewX(-16deg); }
+}
+
+@keyframes cosmicCardSurfaceShift {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes cosmicProjectEdgeSweep {
+  0% { opacity: 0; transform: translateX(-110%); }
+  22% { opacity: 0.75; }
+  100% { opacity: 0; transform: translateX(310%); }
+}
+
+@keyframes cosmicSkillSweep {
+  from { transform: translateX(-115%); }
+  to { transform: translateX(115%); }
+}
+
+@keyframes cosmicSkillFinish {
+  0% { background-position: 0% 50%; box-shadow: 0 0 8px rgba(101, 231, 255, 0.16); }
+  65% { background-position: 100% 50%; box-shadow: 0 0 18px rgba(101, 231, 255, 0.38); }
+  100% { background-position: 72% 50%; box-shadow: 0 0 12px rgba(101, 231, 255, 0.22); }
+}
+
+@keyframes cosmicSectionNebula {
+  from { opacity: 0.6; transform: translate3d(0, -1%, 0) scale(0.96); }
+  to { opacity: 1; transform: translate3d(-3%, 2%, 0) scale(1.05); }
+}
+
+@media (max-width: 768px) {
+  body { background-attachment: scroll; }
+  body::before { opacity: 0.22; }
+  body::after { opacity: 0.72; filter: blur(34px); }
+  .hero-grid { background-size: 56px 56px; opacity: 0.4; }
+  .hero-bg::before { opacity: 0.28; animation-duration: 108s, 7.4s; }
+  .hero-bg::after { display: none; }
+  .hero-gradient::after { display: none; }
+  .hero-gradient::before { animation-duration: 20s; }
+  .hero-glow { width: 280px; height: 280px; filter: blur(90px); }
+  .nav-links { background: rgba(8, 12, 31, 0.97); backdrop-filter: blur(20px); }
+  [data-theme="light"] .nav-links { background: rgba(245, 247, 255, 0.97); }
+  .about-card,
+  .skill-category,
+  .project-card,
+  .timeline-content,
+  .education-card,
+  .cert-card,
+  .contact-card,
+  .contact-intro-card { backdrop-filter: blur(8px); }
+}
+
+@media (max-width: 480px) {
+  body::after { opacity: 0.52; }
+  .section:nth-of-type(odd)::before { display: none; }
+  .hero::before { opacity: 0.7; }
+  .hero-bg::before { opacity: 0.2; }
+  .hero-gradient::before { opacity: 0; animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  .hero::before,
+  .hero-bg::before,
+  .hero-bg::after,
+  .hero-gradient,
+  .hero-grid,
+  .hero-glow,
+  .hero-name,
+  .nav-logo,
+  .section:nth-of-type(odd)::before,
+  .skill-fill,
+  .skill-fill::after { animation: none !important; }
+
+  .hero-gradient::before,
+  .hero-gradient::after { display: none !important; }
+
+  .hero-greeting,
+  .hero-name,
+  .hero-title,
+  .hero-intro,
+  .hero-cta,
+  .section .section-title,
+  .section .about-text,
+  .section .about-visual,
+  .section .skill-category,
+  .section .project-card,
+  .section .timeline-item,
+  .section .education-card,
+  .section .cert-card,
+  .section .contact-intro-wrap,
+  .section .contact-grid,
+  .section .contact-form {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
